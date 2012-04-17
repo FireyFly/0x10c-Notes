@@ -2,6 +2,9 @@
 ; (in #0x10c-dev) of how the leaked game handles the virtual
 ; monitor.
 ; 
+; Updated to include differences in the DCPU applet
+; available at http://dcpu.com/highnerd/
+; 
 ; 0x8000 - 0x8180 ; Display (32x12)
 ; 0x8180 - 0x8280 ; Characters
 ; 0x8280 - 0x8281 ; Misc
@@ -38,8 +41,8 @@
 ;      it's 0x00.
 ; 
 ;    When both red and green are set and highlight is not set,
-;      green is 0xFF (ie, b0110 gives 0xFFAAFF00 assuming
-;      0xAARRGGBB).
+;      blue is +0x55 (ie, b0110 gives 0xFFAAAA55 assuming
+;      0xAARRGGBB, originally was 0xFFAAFF00).
 ; 
 ;    When highlight is set, all values are
 ;      +0x55 (set channel is 0xFF, unset channel is 0x55).
@@ -78,4 +81,6 @@
 ; Misc is defined as:
 ; 
 ; (0x8280[0] & 0xF) defines background color of screen,
-; as defined by the background color lookup.
+; as defined by the background color lookup. Since
+; the normal display cannot have alpha, this color
+; only appears as a border.
